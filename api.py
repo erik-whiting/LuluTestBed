@@ -1,5 +1,6 @@
 import flask
 from flask import request, jsonify
+from flask import make_response
 from resources.resources import Resources
 
 
@@ -16,7 +17,7 @@ def home():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return '<h1>Cannot find that resource</h1>', 404
+    return make_response(jsonify({'error': 'not Found'}), 404)
 
 
 @app.route('/api/v1/resources/bands', methods=['GET'])

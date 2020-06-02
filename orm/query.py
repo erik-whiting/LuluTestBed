@@ -11,6 +11,9 @@ class Connection:
                                     host="127.0.0.1",
                                     port="5432")
 
+    def close(self):
+        self.con.close()
+
 
 class Query:
     def __init__(self, connection: Connection, query_string):
@@ -21,6 +24,11 @@ class Query:
 
     def execute(self):
         self.cursor.execute(self.query_string)
+
+    def execute_no_return(self):
+        cursor = self.connection.con.cursor()
+        cursor.execute(self.query_string)
+        self.connection.con.commit()
 
     def fetch_results(self):
         rows = self.cursor.fetchall()
