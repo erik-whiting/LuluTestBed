@@ -1,8 +1,8 @@
 import flask
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from flask import make_response
 from resources.resources import Resources
-
+from resources.sale import Sale
 
 app = flask.Flask(__name__)
 app.config['DEBUG'] = True
@@ -43,6 +43,14 @@ def api_track_list():
     album_id = request.args.get('album_id')
     band_id = request.args.get('band_id')
     return jsonify(r.track_list(album_id=album_id, band_id=band_id))
+
+
+@app.route('/api/v1/resources/make_sale', methods=['POST'])
+def api_make_sale():
+    if not request.json or 'sale' not in request.json:
+        abort(400)
+    line_items = request.json['line_items']
+    sale = Sale(line_items)
 
 
 app.run()
