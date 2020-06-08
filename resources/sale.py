@@ -20,19 +20,31 @@ class Sale:
         return next_id
 
     def commit(self):
-        self.__insert_self()
-        line_item_values = ''
-        for i, line_item in enumerate(self.line_items):
-            line_item_values += '(' + line_item.insert_command_partial() + ')'
-            line_item_values += ', ' if len(self.line_items) > i + 1 else ';'
-        line_item_insert = f'INSERT INTO LineItem (SaleId, AlbumId, Price) VALUES {line_item_values}'
-        Query(self.connection, line_item_insert).execute_no_return()
-        self.connection.close()
+        insert_self = self.__insert_self()
+        if insert_self['success'] == 'true':
+            line_item_values = ''
+            for i, line_item in enumerate(self.line_items):
+                line_item_values += '(' + line_item.insert_command_partial() + ')'
+                line_item_values += ', ' if len(self.line_items) > i + 1 else ';'
+            line_item_insert = f'INSERT INTO LineItem (SaleId, AlbumId, Price) VALUES {line_item_values}'
+            try:
+                Query(self.connection, line_item_insert).execute_no_return()
+                self.connection.close()
+                return {'success': 'true', 'Sale': f'{self.id}'}
+            except ValueError as err:
+                self.connection.close()
+                return {'success': 'false', 'insert LineItem failed': err}
+        else:
+            return insert_self
 
     def __insert_self(self):
         query_string = f'INSERT INTO Sale (Id, DateOfSale) VALUES ({self.id}, \'{self.date}\')'
         q = Query(self.connection, query_string)
-        q.execute_no_return()
+        try:
+            q.execute_no_return()
+            return {'success': 'true'}
+        except ValueError as err:
+            return {'success': 'false', 'Sale': f'insert id: {self.id}', 'error': err}
 
     def __map_line_items(self, line_items):
         for line_item in line_items:

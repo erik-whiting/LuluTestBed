@@ -47,10 +47,11 @@ def api_track_list():
 
 @app.route('/api/v1/resources/make_sale', methods=['POST'])
 def api_make_sale():
-    if not request.json or 'sale' not in request.json:
+    if not request.json or 'line_items' not in request.json:
         abort(400)
     line_items = request.json['line_items']
     sale = Sale(line_items)
+    return jsonify(sale.commit())
 
 
 app.run()
