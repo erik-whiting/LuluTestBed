@@ -1,0 +1,22 @@
+.band-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.band-table td {
+    padding: 7px;
+    border: cadetblue 1px solid;
+    text-align: center;
+}
+
+.band-table tr{
+    background: #618685;
+}
+
+.band-table tr:nth-child(odd) {
+    background: #866162;
+}
+
+.band-table tr:nth-child(even) {
+    background: #867461;
+}
