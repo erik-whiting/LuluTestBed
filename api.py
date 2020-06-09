@@ -1,10 +1,15 @@
+import os
 import flask
 from flask import request, jsonify, abort
-from flask import make_response
+from flask import make_response, render_template
 from resources.resources import Resources
 from resources.sale import Sale
 
-app = flask.Flask(__name__)
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath('test_site/*')))
+template_dir = os.path.join(base_dir, 'templates')
+static_dir = os.path.join(template_dir, 'css')
+
+app = flask.Flask(__name__, template_folder=template_dir, static_folder=template_dir)
 app.config['DEBUG'] = True
 
 r = Resources()
@@ -12,8 +17,12 @@ r = Resources()
 
 @app.route('/', methods=['GET'])
 def home():
-    return '<h1>Prototype is working</h1>'
+    headers = {'Content-Type': 'text/html'}
+    return make_response(render_template('index.html'), headers)
 
+@app.route('/bands', methods=['GET'])
+def bands():
+    return make_response(render_template('pages/bands.html'))
 
 @app.errorhandler(404)
 def page_not_found(e):
