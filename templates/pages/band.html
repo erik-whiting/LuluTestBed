@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/bands.css">
-    <title>Artist Placeholder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bands.css') }}">
+    <script src="{{ url_for('static', filename='js/band.js') }}"></script>
+    <script>
+        document.onloadend = load_function('{{ track_list }}')
+    </script>
+
+    <title id="artist-title">{{ band_name }}</title>
 </head>
 <body>
     <div class="header">
-        <h2>Artist Placeholder</h2>
+        <h2 id="artist-header">{{ band_name }}</h2>
     </div>
-    <table class="band-table">
-        <tr>
-            <td>Album Name</td>
-        </tr>
-        <tr>
-            <td>Album Name</td>
-        </tr>
-        <tr>
-            <td>Album Name</td>
-        </tr>
-        <tr>
-            <td>Album Name</td>
-        </tr>
+    <table id="band-table" class="band-table">
+        <script>populate_table(track_list);</script>
     </table>
 </body>
+<a href="/bands">Bands</a>
 </html>

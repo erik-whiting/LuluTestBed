@@ -1,3 +1,4 @@
+import json
 import os
 import flask
 from flask import request, jsonify, abort
@@ -20,9 +21,25 @@ def home():
     headers = {'Content-Type': 'text/html'}
     return make_response(render_template('index.html'), headers)
 
+
 @app.route('/bands', methods=['GET'])
 def bands():
     return make_response(render_template('pages/bands.html'))
+
+
+@app.route('/bands/<band_id>', methods=['GET'])
+def band(band_id):
+    band_name = r.bands(band_id)[0]['bandname']
+    albums = r.album_by_band(band_id)
+    songs = {}
+    for album in albums:
+        album['releasedate'] = album['releasedate'].isoformat()
+        all_songs = r.song_by_album(album['id'])
+        for song in all_songs:
+            song['releasedate'] = song['releasedate'].isoformat()
+        songs[album['albumname']] = all_songs
+    return make_response(render_template('pages/band.html', band_name=band_name, track_list=json.dumps(songs)))
+
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -47,11 +64,14 @@ def api_albums():
     return jsonify(r.albums(album_id))
 
 
-@app.route('/api/v1/resources/track_list', methods=['GET'])
-def api_track_list():
-    album_id = request.args.get('album_id')
-    band_id = request.args.get('band_id')
-    return jsonify(r.track_list(album_id=album_id, band_id=band_id))
+@app.route('/api/v1/resources/track_list/<band_id>', methods=['GET'])
+def api_track_list(band_id):
+    albums = r.album_by_band(band_id)
+    songs = {}
+    for album in albums:
+        all_songs = r.song_by_album(album['id'])
+        songs[album['albumname']] = all_songs
+    return jsonify(songs)
 
 
 @app.route('/api/v1/resources/make_sale', methods=['POST'])

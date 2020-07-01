@@ -18,6 +18,16 @@ class Resources:
         query_string = self.__query_string('*', 'album', album_id)
         return self.__query(query_string)
 
+    def album_by_band(self, band_id):
+        query_string = self.__query_string('*', 'album', None)
+        query_string += f' WHERE bandid = {band_id}'
+        return self.__query(query_string)
+
+    def song_by_album(self, album_id):
+        query_string = self.__query_string('*', 'song', None)
+        query_string += f' WHERE albumid = {album_id}'
+        return self.__query(query_string)
+
     def track_list(self, album_id='', band_id=''):
         query_string = self.__query_string('"Band", "Album", "ReleaseDate", "Track"', 'tracklist', None)
         query_string += f' WHERE "albumid" = {album_id}' if album_id else ''

@@ -38,3 +38,38 @@ body {
         width: 100%;
     }
 }
+
+#navigation div:hover {
+    background-color: #36486b;
+}
+
+#navigation a {
+    color: #36486b;
+}
+
+
+#navigation a:visited {
+    color: #36486b;
+}
+
+#navigation a:hover {
+    color: #fefbd8;
+}
+
+#bands, #albums, #sales {
+    padding: 100px;
+    font-size: x-large;
+    text-align: center;
+}
+
+#bands {
+    background-color:#618685;
+}
+
+#albums {
+    background-color:#867461;
+}
+
+#sales {
+    background-color:#866162
+}

@@ -12,6 +12,10 @@ allBands.then(function(results) {
         let row = band_table.insertRow(band.id);
         let cell = row.insertCell(0);
         row.setAttribute('id', `band-${band.id}`);
-        cell.innerHTML = band.bandname;
+        let bandName = band.bandname;
+        let url = `/bands/${band.id}`;
+        let link = `<a href='${url}'>${bandName}</a>`;
+
+        cell.innerHTML = link;
     });
 });

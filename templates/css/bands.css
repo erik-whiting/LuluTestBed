@@ -20,3 +20,7 @@
 .band-table tr:nth-child(even) {
     background: #867461;
 }
+
+.song-list ul {
+    text-align: left;
+}
