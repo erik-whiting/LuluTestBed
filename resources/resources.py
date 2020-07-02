@@ -53,6 +53,28 @@ class Resources:
         query_string += f' WHERE "bandid" = {band_id}' if band_id else ''
         return self.__query(query_string)
 
+    def sales(self):
+        q = 'SELECT * FROM sale ORDER BY dateofsale DESC'
+        sales = self.__query(q)
+        return_data = []
+        for sale in sales:
+            line_items = self.__query(self.__line_items_query(sale['id']))
+            li_hash = []
+            for li in line_items:
+                li_hash.append({
+                    'album_id': li['albumid'],
+                    'album_name': li['albumname'],
+                    'price': li['price']
+                })
+
+            sale_hash = {
+                'sale_id': sale['id'],
+                'date': sale['dateofsale'].isoformat(),
+                'line_items': li_hash
+            }
+            return_data.append(sale_hash)
+        return return_data
+
     @staticmethod
     def __query_string(params, table, table_id):
         q_string = f'SELECT {params} FROM {table}'
@@ -62,3 +84,19 @@ class Resources:
     def __query(self, query_string):
         q = Query(self.connection, query_string)
         return q.run()
+
+    @staticmethod
+    def __line_items_query(sale_id):
+        query = """
+            SELECT
+                s.dateOfSale,
+                li.albumId,
+                album.albumname,
+                pm.price
+            FROM sale s
+            JOIN lineItem li ON li.saleId = s.id
+            JOIN album ON album.id = li.albumId
+            JOIN priceMap pm ON pm.albumId = li.albumId
+        """
+        query += f'WHERE s.id = {sale_id}'
+        return query

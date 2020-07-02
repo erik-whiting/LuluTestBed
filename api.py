@@ -49,6 +49,11 @@ def albums():
     return make_response(render_template('pages/albums.html', albums=json.dumps(albums)))
 
 
+@app.route('/sales', methods=['GET'])
+def sales():
+    sales = r.sales()
+    return make_response(render_template('pages/sales.html', sales=json.dumps(sales)))
+
 @app.errorhandler(404)
 def page_not_found(e):
     return make_response(jsonify({'error': 'not Found'}), 404)

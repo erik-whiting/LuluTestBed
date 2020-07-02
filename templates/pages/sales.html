@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sales.css') }}">
+    <script src="{{ url_for('static', filename='js/sales.js') }}"></script>
+    <script>
+        document.onloadend = load_function('{{ sales }}')
+    </script>
+
+    <title class="sales-title">Sales</title>
+</head>
+<body>
+    <div class="header">
+        <h2 id="sales-header">Sales</h2>
+    </div>
+    <table id="sales-table" class="sales-table">
+        <script>populate_table(sales);</script>
+    </table>
+</body>
+<a href="/bands">Bands</a>
+</html>
