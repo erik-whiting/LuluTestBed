@@ -41,6 +41,14 @@ def band(band_id):
     return make_response(render_template('pages/band.html', band_name=band_name, track_list=json.dumps(songs)))
 
 
+@app.route('/albums', methods=['GET'])
+def albums():
+    albums = r.album_view()
+    for album in albums:
+        album['releasedate'] = album['releasedate'].isoformat()
+    return make_response(render_template('pages/albums.html', albums=json.dumps(albums)))
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return make_response(jsonify({'error': 'not Found'}), 404)
@@ -56,12 +64,6 @@ def api_bands():
 def api_songs():
     song_id = request.args.get('id')
     return jsonify(r.songs(song_id))
-
-
-@app.route('/api/v1/resources/albums', methods=['GET'])
-def api_albums():
-    album_id = request.args.get('id')
-    return jsonify(r.albums(album_id))
 
 
 @app.route('/api/v1/resources/track_list/<band_id>', methods=['GET'])

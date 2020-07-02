@@ -14,7 +14,26 @@ class Resources:
         query_string = self.__query_string('*', 'band', band_id)
         return self.__query(query_string)
 
-    def albums(self, album_id):
+    def albums(self):
+        query_string = self.__query_string('*', 'album', None)
+        return self.__query(query_string)
+
+    def album_view(self):
+        q_albums = self.__query_string('*', 'album', None)
+        q_songs = lambda album_id: f'SELECT * FROM song  WHERE albumid = {album_id}'
+        q_artist = lambda band_id: self.__query_string('bandname', 'band', band_id)
+        albums = self.__query(q_albums)
+        for album in albums:
+            artist = self.__query(q_artist(album['bandid']))
+            artist = artist[0]['bandname']
+            album['artist'] = artist
+            songs = self.__query(q_songs(album['id']))
+            for song in songs:
+                song['releasedate'] = song['releasedate'].isoformat()
+            album['songs'] = songs
+        return albums
+
+    def album(self, album_id):
         query_string = self.__query_string('*', 'album', album_id)
         return self.__query(query_string)
 
