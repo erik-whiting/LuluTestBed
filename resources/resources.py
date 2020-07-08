@@ -75,6 +75,10 @@ class Resources:
             return_data.append(sale_hash)
         return return_data
 
+    def album_sale_hash(self):
+        query_string = f'SELECT al.albumname, p.price FROM album al JOIN pricemap p on al.id = p.albumid;'
+        return self.__query(query_string)
+
     @staticmethod
     def __query_string(params, table, table_id):
         q_string = f'SELECT {params} FROM {table}'

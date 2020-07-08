@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/make_sale.css') }}">
+    <script src="{{ url_for('static', filename='js/make_sale.js') }}"></script>
+    <script>
+        document.onloadend = load_function(`{{ albums }}`, `{{ album_sale_hash }}`)
+    </script>
+
+    <title class="sales-title">New Sale</title>
+</head>
+<body>
+    <div class="header">
+        <h2 id="sales-header">New Sale</h2>
+    </div>
+    <table id="sales-table" class="sales-table">
+        <tr>
+            <th>Album</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Add Line Item</th>
+        </tr>
+        <script>display_line_item()</script>
+    </table>
+</body>
+<a href="/bands">Bands</a>
+</html>

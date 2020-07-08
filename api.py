@@ -54,6 +54,18 @@ def sales():
     sales = r.sales()
     return make_response(render_template('pages/sales.html', sales=json.dumps(sales)))
 
+
+@app.route('/new_sale', methods=['GET'])
+def new_sale_page():
+    albums = r.album_view()
+    album_sale_hash = r.album_sale_hash()
+    for album in albums:
+        album['releasedate'] = album['releasedate'].isoformat()
+    albums = json.dumps(albums);
+    album_sale_hash = json.dumps(album_sale_hash);
+    return make_response(render_template('pages/make_sale.html', albums=albums, album_sale_hash=album_sale_hash))
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return make_response(jsonify({'error': 'not Found'}), 404)
