@@ -1,6 +1,6 @@
 -- Database: MusicStore
 
--- DROP DATABASE MusicStore;
+DROP DATABASE MusicStore;
 
 CREATE DATABASE MusicStore
     WITH 
