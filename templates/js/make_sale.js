@@ -56,7 +56,7 @@ function display_line_item() {
 
     let add_button = document.createElement('button');
     add_button.className = 'add-line-item';
-    add_button.onclick = display_line_item;
+    add_button.onclick = new_line_item;
     add_button.innerText = 'Add';
 
     album_cell.insertAdjacentElement('afterbegin', select);
@@ -65,7 +65,12 @@ function display_line_item() {
     add_cell.insertAdjacentElement('afterbegin', add_button);
 
     line_item_total(line_item_count);
+    calculate_total();
+}
+
+function new_line_item() {
     line_item_count += 1;
+    display_line_item();
 }
 
 function populateSelect(select) {
@@ -81,5 +86,25 @@ function line_item_total(row) {
     let quantity = document.getElementById(`quantity-input-${row}`).value;
     let album = document.getElementById(`album-select-${row}`).value;
     let album_price = sale_hash[album].split('$')[1];
-    document.getElementById(`line-item-price-${row}`).innerText = album_price * quantity;
+    let line_item_total = album_price * quantity;
+    document.getElementById(
+        `line-item-price-${row}`
+    ).innerText = line_item_total.toFixed(2);
+    calculate_total();
+}
+
+function calculate_total() {
+    let total = 0;
+    let iter = 1;
+    while (iter <= line_item_count) {
+        let li_price = parseFloat(
+            document.getElementById(`line-item-price-${iter}`).innerText
+        );
+        total += li_price;
+        iter++;
+    }
+    let total_cell = document.getElementById('sale-total');
+    total = total.toFixed(2);
+    total = `<b>$${total}</b>`;
+    total_cell.innerHTML = total;
 }
