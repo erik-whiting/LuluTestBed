@@ -108,3 +108,37 @@ function calculate_total() {
     total = `<b>$${total}</b>`;
     total_cell.innerHTML = total;
 }
+
+function prepare_submission() {
+    let iter = 1;
+    let albums = [];
+    while (iter <= line_item_count) {
+        let selected_option = document.getElementById(`album-select-${iter}`).selectedOptions;
+        let album_id = selected_option[0].id;
+        let quantity = document.getElementById(`quantity-input-${iter}`);
+        quantity = parseInt(quantity.value);
+        let album_hash = {'album_id': album_id};
+        for (let i = 0; i < quantity; i++) {
+            albums.push(album_hash);
+        }
+        iter++;
+    }
+    let post_object = {'line_items': albums};
+    return post_object;
+}
+
+function submit() {
+    let data = prepare_submission();
+    let url = '/api/v1/resources/make_sale';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(res => {
+       console.log('Request Complete: ', res);
+    });
+    window.location.replace("/sales");
+}
