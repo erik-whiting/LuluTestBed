@@ -98,6 +98,7 @@ INSERT INTO Album (AlbumName, ReleaseDate, BandId) VALUES
   ('Commercial brake', RandomDate(), RandomId()),
   ('No direction', RandomDate(), RandomId());
 
+INSERT INTO PriceMap SELECT Id, RANDOM()*30::MONEY FROM Album;
 
 INSERT INTO Song (SongName, ReleaseDate, AlbumId) VALUES
   ('Whole Lotta Pencils', RandomDate(), RandomBandId()),
