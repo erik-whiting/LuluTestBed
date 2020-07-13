@@ -18,10 +18,11 @@ cd test_site
 
 # Build database
 sudo service postgresql start
-psql -U postgres -h 127.0.0.1 -f ./seed_data/create.sql
-psql -U postgres -h 127.0.0.1 -f ./seed_data/helper_functions.sql
-psql -U postgres -h 127.0.0.1 -f ./seed_data/make_views.sql
-psql -U postgres -h 127.0.0.1 -f ./seed_data/initial_seeds.sql
-psql -U postgres -h 127.0.0.1 -f ./seed_data/sales.sql
+sudo -u postgres psql -c "CREATE DATABASE musicstore;"
+sudo -u postgres psql -d musicstore -a -f ./seed_data/create.sql
+sudo -u postgres psql -d musicstore -a -f ./seed_data/helper_functions.sql
+sudo -u postgres psql -d musicstore -a -f ./seed_data/make_views.sql
+sudo -u postgres psql -d musicstore -a -f ./seed_data/initial_seeds.sql
+sudo -u postgres psql -d musicstore -a -f ./seed_data/sales.sql
 
 python api.py

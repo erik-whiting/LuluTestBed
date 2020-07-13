@@ -12,7 +12,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE FUNCTION RandomBandId() RETURNS INTEGER AS $$
   BEGIN
-    RETURN (RANDOM()*(66-2)+2)::INT;
+    RETURN (RANDOM()*(66-2)+1)::INT;
   END
 $$ LANGUAGE plpgsql
 
