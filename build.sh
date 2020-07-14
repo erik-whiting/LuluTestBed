@@ -16,7 +16,7 @@ pip3 install psycopg2
 
 # Build database
 sudo service postgresql start
-sudo -u postgres psql -c "ALTER ROL postgres WITH PASSWORD 'postgres';"
+sudo -u postgres psql -c "ALTER ROLE postgres WITH PASSWORD 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE musicstore;"
 sudo -u postgres psql -d musicstore -a -f ./seed_data/create.sql
 sudo -u postgres psql -d musicstore -a -f ./seed_data/helper_functions.sql
