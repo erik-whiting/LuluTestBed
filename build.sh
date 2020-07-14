@@ -1,4 +1,6 @@
 # Run this script from test_site root after pulling from git
+# You might have to change this file's permissions, e.g.:
+# $> chmod 777 build.sh
 
 # Get Python and dependencies
 sudo apt-get update
@@ -14,6 +16,7 @@ pip3 install psycopg2
 
 # Build database
 sudo service postgresql start
+sudo -u postgres psql -c "ALTER ROL postgres WITH PASSWORD 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE musicstore;"
 sudo -u postgres psql -d musicstore -a -f ./seed_data/create.sql
 sudo -u postgres psql -d musicstore -a -f ./seed_data/helper_functions.sql
