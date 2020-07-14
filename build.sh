@@ -3,15 +3,15 @@
 # $> chmod 777 build.sh
 
 # Get Python and dependencies
-sudo apt-get update
-sudo apt-get install python3.6
+yes | sudo apt-get update
+yes | sudo apt-get install python3.6
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
-sudo apt install python3-pip
+yes | sudo apt install python3-pip
 pip3 install Flask
 
-sudo apt-get install postgresql
-sudo apt-get install postgresql-server-dev-10
+yes | sudo apt-get install postgresql
+yes | sudo apt-get install postgresql-server-dev-10
 pip3 install psycopg2
 
 # Build database
