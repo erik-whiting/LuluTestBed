@@ -5,7 +5,7 @@ import json
 
 class Connection:
     def __init__(self):
-        self.con = psycopg2.connect(database="MusicStore",
+        self.con = psycopg2.connect(database="musicstore",
                                     user="postgres",
                                     password="postgres",
                                     host="127.0.0.1",
