@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bands.css') }}">
-
     <script src="{{ url_for('static', filename='js/bands.js') }}"></script>
+    <script>
+        document.onloadend = load_function(`{{ bands_object }}`)
+    </script>
     <title>Bands</title>
 </head>
 <body>
@@ -15,7 +17,7 @@
     </div>
     <table id="band-table" class="band-table">
         <tbody>
-            <tr></tr>
+            <script>populate_table(bands)</script>
         </tbody>
     </table>
 </body>
