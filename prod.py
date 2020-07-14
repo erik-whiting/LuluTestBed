@@ -24,7 +24,8 @@ def home():
 
 @app.route('/bands', methods=['GET'])
 def bands():
-    return make_response(render_template('pages/bands.html'))
+    bands = r.bands(None)
+    return make_response(render_template('pages/bands.html', bands_object=json.dumps(bands)))
 
 
 @app.route('/bands/<band_id>', methods=['GET'])
