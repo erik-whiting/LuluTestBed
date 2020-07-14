@@ -1,4 +1,4 @@
--- Database: MusicStore
+-- Database: musicstore
 
 CREATE TABLE Band(
   Id SERIAL PRIMARY KEY,
