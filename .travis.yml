@@ -10,7 +10,7 @@ addons:
 
 before_script:
   - chmod +x ~/build.sh
-  - chmod +x ~test_site/tests/LPT/LuluPerfTest.jar
+  - chmod +x ~/test_site/tests/LPT/LuluPerfTest.jar
   - bash ~/build.sh
 
 
