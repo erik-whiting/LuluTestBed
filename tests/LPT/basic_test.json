@@ -1,0 +1,23 @@
+{
+  "Performance Test": {
+    "name": "default",
+    "useCases": [
+      {
+        "name": "Explore Albums",
+        "script": "C:\\Users\\eedee\\Documents\\test_site_tests\\customer_user_group\\explore_albums.py",
+        "command": "python",
+        "threads": "2"
+      },
+      {
+        "name": "Explore Bands",
+        "script": "C:\\Users\\eedee\\Documents\\test_site_tests\\customer_user_group\\explore_bands.py",
+        "command": "python",
+        "threads": "2"
+      }
+    ],
+    "monitors": [
+      { "name": "memory", "every": "500" },
+      { "name": "CPU", "every": "500" }
+    ]
+  }
+}
