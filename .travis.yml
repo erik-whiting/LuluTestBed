@@ -12,7 +12,7 @@ before_script:
   - chmod +x ~/build.sh
   - ls ./tests
   - ls ./tests/LPT
-  - chmod +x ~/tests/LPT/LuluPerfTest.jar
+  - chmod +x ./tests/LPT/LuluPerfTest.jar
   - bash ~/build.sh
 
 
