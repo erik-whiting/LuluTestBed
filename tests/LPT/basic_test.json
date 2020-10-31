@@ -4,13 +4,13 @@
     "useCases": [
       {
         "name": "Explore Albums",
-        "script": "C:\\Users\\eedee\\Documents\\test_site_tests\\customer_user_group\\explore_albums.py",
+        "script": "~/test_site/tests/LPT/scripts/explore_bands.py",
         "command": "python",
         "threads": "2"
       },
       {
         "name": "Explore Bands",
-        "script": "C:\\Users\\eedee\\Documents\\test_site_tests\\customer_user_group\\explore_bands.py",
+        "script": "~/test_site/tests/LPT/scripts/explore_albums.py",
         "command": "python",
         "threads": "2"
       }
