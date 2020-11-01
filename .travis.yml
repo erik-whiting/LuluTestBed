@@ -10,7 +10,7 @@ addons:
 
 after_script:
   - chmod +x ~/build.sh
-  - chmod +x ./tests/LPT/LuluPerfTest.jar
+  - chmod 777 ./tests/LPT/LuluPerfTest.jar
   - bash ~/build.sh
   - ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
 
