@@ -13,7 +13,8 @@ after_script:
   - chmod 777 ./tests/LPT/LuluPerfTest.jar
   - bash ~/build.sh
   - java -version
-  - sudo ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
+#  - sudo ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
+  - sudo java -jar ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
 
 script: python -m unittest discover tests
 
