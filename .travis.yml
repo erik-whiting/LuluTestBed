@@ -8,16 +8,6 @@ services:
 addons:
   chrome: stable
 
-after_script:
-  - chmod +x ~/build.sh
-  - chmod 777 ./tests/LPT/LuluPerfTest.jar
-  - bash ~/build.sh
-  - java -version
-#  - sudo ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
-  - sudo java -jar ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
-
-script: python -m unittest discover tests
-
 install:
   - pip install flask
   - pip install psycopg2
@@ -28,3 +18,12 @@ install:
   - sudo chmod +x /usr/local/share/chromedriver
   - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
   - sudo apt-get install binfmt-support
+
+script: python -m unittest discover tests
+
+after_script:
+  - chmod +x ~/build.sh
+  - chmod 777 ./tests/LPT/LuluPerfTest.jar
+  - bash ~/build.sh
+  - java -version
+  - sudo java -jar ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
