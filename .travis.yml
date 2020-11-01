@@ -13,6 +13,7 @@ after_script:
   - chmod +x ./tests/LPT/LuluPerfTest.jar
   - bash ~/build.sh
 
+script: python -m unittest discover tests
 
 install:
   - pip install flask
