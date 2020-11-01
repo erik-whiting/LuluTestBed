@@ -12,6 +12,7 @@ after_script:
   - chmod +x ~/build.sh
   - chmod +x ./tests/LPT/LuluPerfTest.jar
   - bash ~/build.sh
+  - ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
 
 script: python -m unittest discover tests
 
