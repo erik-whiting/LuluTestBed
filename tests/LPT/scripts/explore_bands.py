@@ -1,8 +1,42 @@
-import random
+import random, time
 from LuluTest import *
 
-from vars import Vars
-from customer_profile import CustomerProfile
+
+class CustomerProfile:
+  # For testing purposes, I am making the wait times much shorter than
+  # they probably would be in a real life situation.
+  def __init__(self):
+    self.description = 'Typical customer usage'
+
+  def linger(self):
+    time.sleep(random.randrange(1, 5))
+
+  def get_distracted(self):
+    time.sleep(random.randrange(3, 7))
+
+  def go_to_bathroom(self):
+    time.sleep(random.randrange(5, 9))
+
+  def go_to_lunch(self):
+    time.sleep(random.randrange(7, 11))
+
+
+class Vars:
+  def __init__(self):
+    local = 'http://127.0.0.1:5000/'
+    # self.url = 'http://ec2-3-133-125-213.us-east-2.compute.amazonaws.com/'
+    self.url = local
+
+  def new_page(self):
+    page = Page(self.url)
+    return page
+
+  def new_actions(self, headless=True):
+    if headless:
+      actions = Action()
+    else:
+      actions = Action('Chrome', 'not headless')
+    return actions
 
 customer = CustomerProfile()
 
