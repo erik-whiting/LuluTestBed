@@ -43,7 +43,7 @@ customer = CustomerProfile()
 
 vars = Vars()
 page = vars.new_page()
-actions = vars.new_actions() # Make headless by passing False
+actions = vars.new_actions() # Make not headless by passing False
 
 actions.go(page)
 customer.linger()
