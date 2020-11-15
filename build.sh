@@ -26,4 +26,4 @@ sudo -u postgres psql -d musicstore -a -f ./seed_data/sales.sql
 
 # Run api.py if in dev environment
 # Run prod.py if in prod
-sudo python prod.py
+sudo python api.py
