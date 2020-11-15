@@ -27,5 +27,5 @@ after_script:
   - bash ~/build.sh
   - java -version
   - pwd
-  - ls
+  - ls ./tests/LPT/scripts
   - java -jar ./tests/LPT/LuluPerfTest.jar ./tests/LPT/basic_test.json
