@@ -19,6 +19,9 @@ install:
   - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
   - sudo apt-get install binfmt-support
 
+before_script:
+  - psql -c 'create database musicstore;' -U postgres
+
 script: python -m unittest discover tests
 
 after_script:
