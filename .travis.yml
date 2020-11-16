@@ -28,4 +28,5 @@ after_script:
   - java -version
   - home=$(pwd)
   - ls ./tests/LPT/scripts
+  - ls $home/tests/LPT
   - java -jar ./tests/LPT/LuluPerfTest.jar $home/tests/LPT/basic_test.json
