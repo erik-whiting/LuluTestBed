@@ -26,11 +26,11 @@ before_script:
   - psql -U postgres  -d musicstore -a -f ./seed_data/make_views.sql
   - psql -U postgres  -d musicstore -a -f ./seed_data/initial_seeds.sql
   - psql -U postgres  -d musicstore -a -f ./seed_data/sales.sql
+  - python api.py &
 
 script: python -m unittest discover tests
 
 after_script:
-  - python api.py &
   - pwd
   - home=$(pwd)
   - chmod +x $home/build.sh
