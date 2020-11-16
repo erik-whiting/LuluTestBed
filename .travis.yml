@@ -34,5 +34,6 @@ after_script:
   - home=$(pwd)
   - chmod +x $home/build.sh
   - chmod 777 ./tests/LPT/LuluPerfTest.jar
-  - bash $home/build.sh
+  - ls
+  - python api.py
   - java -jar ./tests/LPT/LuluPerfTest.jar $home/tests/LPT/basic_test.json
