@@ -22,10 +22,9 @@ install:
 script: python -m unittest discover tests
 
 after_script:
-  - chmod +x ~/build.sh
-  - chmod 777 ./tests/LPT/LuluPerfTest.jar
-  - bash ~/build.sh
+  - pwd
   - home=$(pwd)
-  - ls ./tests/LPT/scripts
-  - ls $home/tests/LPT
+  - chmod +x $home/build.sh
+  - chmod 777 ./tests/LPT/LuluPerfTest.jar
+  - bash $home/build.sh
   - java -jar ./tests/LPT/LuluPerfTest.jar $home/tests/LPT/basic_test.json
