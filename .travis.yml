@@ -27,6 +27,7 @@ before_script:
   - psql -U postgres  -d musicstore -a -f ./seed_data/initial_seeds.sql
   - psql -U postgres  -d musicstore -a -f ./seed_data/sales.sql
   - python api.py &
+  - sleep 10
 
 script: python -m unittest discover tests
 
@@ -35,6 +36,6 @@ after_script:
   - home=$(pwd)
   - chmod +x $home/build.sh
   - chmod 777 ./tests/LPT/LuluPerfTest.jar
-  - ls
+  - ls ./tests/LPT/scripts
   - sleep 10
   - java -jar ./tests/LPT/LuluPerfTest.jar $home/tests/LPT/basic_test.json
