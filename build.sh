@@ -15,9 +15,13 @@ yes | sudo apt-get install postgresql-server-dev-10
 pip3 install psycopg2
 
 # Build database
+echo "starting postgres"
 sudo service postgresql start
+echo "creating db user"
 sudo -u postgres psql -c "ALTER ROLE postgres WITH PASSWORD 'postgres';"
+echo "creating database"
 sudo -u postgres psql -c "CREATE DATABASE musicstore;"
+echo "running db scripts"
 sudo -u postgres psql -d musicstore -a -f ./seed_data/create.sql
 sudo -u postgres psql -d musicstore -a -f ./seed_data/helper_functions.sql
 sudo -u postgres psql -d musicstore -a -f ./seed_data/make_views.sql
