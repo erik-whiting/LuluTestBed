@@ -25,7 +25,6 @@ after_script:
   - chmod +x ~/build.sh
   - chmod 777 ./tests/LPT/LuluPerfTest.jar
   - bash ~/build.sh
-  - java -version
   - home=$(pwd)
   - ls ./tests/LPT/scripts
   - ls $home/tests/LPT
