@@ -1,0 +1,7 @@
+orm/
+resources/
+__pycache__/
+
+*.pyc
+
+.env
