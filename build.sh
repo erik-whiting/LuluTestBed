@@ -4,7 +4,7 @@
 
 # Get Python and dependencies
 yes | sudo apt-get update
-yes | sudo apt-get install python3.6
+yes | sudo apt-get install python3.8
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 yes | sudo apt install python3-pip
@@ -28,6 +28,12 @@ sudo -u postgres psql -d musicstore -a -f ./seed_data/make_views.sql
 sudo -u postgres psql -d musicstore -a -f ./seed_data/initial_seeds.sql
 sudo -u postgres psql -d musicstore -a -f ./seed_data/sales.sql
 
-# Run api.py if in dev environment
-# Run prod.py if in prod
-sudo python api.py
+# Uncomment one of the following lines if you
+# want the build script to start the application
+# once the build has completed.
+
+# For local development, uncomment the following line:
+# sudo python api.py
+
+# For live or remote enviornments, uncomment the following line:
+# sudo python prod.py
