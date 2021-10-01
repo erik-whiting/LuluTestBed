@@ -18,5 +18,20 @@ distribute. Contributors are encouraged and welcome.
 
 # Set up
 
-TODO: Write app setup instructions
+The web application is built with Python, Flask, and Postgres. At this time,
+Postgres is a hard requirement due to Python packaging requirements (and really 
+to help us keep things simple). We wish to add the ability to allow users to
+use whatever database system they want.
 
+## Linux
+
+In this repository's root, you will find a file called `build.sh`. Execute
+this script to build the web application in a Linux environment. Additionally,
+at the bottom of this script, you will find commented-out commands to start
+the application. Uncommenting these will run LuluTestBed once the build has
+completed. This is helpful for remote environments like clouds and CI servers
+where each run typically requires a fresh installation.
+
+## Windows
+
+TODO: Create PowerShell script to build and launc application in Windows
