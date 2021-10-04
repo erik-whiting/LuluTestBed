@@ -5,6 +5,9 @@ from flask import request, jsonify, abort
 from flask import make_response, render_template
 from resources.resources import Resources
 from resources.sale import Sale
+from dotenv import load_dotenv
+
+load_dotenv()
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath('test_site/*')))
 template_dir = os.path.join(base_dir, 'templates')

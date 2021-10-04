@@ -23,6 +23,11 @@ Postgres is a hard requirement due to Python packaging requirements (and really
 to help us keep things simple). We wish to add the ability to allow users to
 use whatever database system they want.
 
+## Docker
+To run using docker-compose ```docker-compose up -d```.  
+.env file contains host to docker container. Without docker-compose 
+testing set ```localhost```.
+
 ## Linux
 
 In this repository's root, you will find a file called `build.sh`. Execute

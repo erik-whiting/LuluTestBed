@@ -11,8 +11,6 @@ RUN pip install psycopg2
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
-
 ENTRYPOINT [ "python" ]
 
 CMD [ "api.py" ]
