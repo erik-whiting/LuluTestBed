@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  app:
+    build:
+      dockerfile: ./docker/python/Dockerfile
+      context: .
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - app_network
+    ports:
+      - "5000:5000"
+    expose:
+      - 5000
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=musicstore
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./seed_data/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./seed_data/helper_functions.sql:/docker-entrypoint-initdb.d/helper_functions.sql
+      - ./seed_data/initial_seeds.sql:/docker-entrypoint-initdb.d/initial_seeds.sql
+      - ./seed_data/make_views.sql:/docker-entrypoint-initdb.d/make_views.sql
+      - ./seed_data/sales.sql:/docker-entrypoint-initdb.d/sales.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - app_network
+
+networks:
+  app_network:

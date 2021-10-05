@@ -1,6 +1,7 @@
 import psycopg2
 import psycopg2.extras
 import json
+import os
 
 
 class Connection:
@@ -8,7 +9,7 @@ class Connection:
         self.con = psycopg2.connect(database="musicstore",
                                     user="postgres",
                                     password="postgres",
-                                    host="127.0.0.1",
+                                    host=os.getenv('DB_HOST'),
                                     port="5432")
 
     def close(self):
