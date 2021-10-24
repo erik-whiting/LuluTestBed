@@ -54,6 +54,9 @@ class Resources:
         query_string = self.__query_string('*', 'album', album_id)
         return self.__query(query_string)
 
+    def album_delete(self, id):
+        return self.__execute(f"DELETE FROM album WHERE id = {id}")
+
     def album_by_band(self, band_id):
         query_string = self.__query_string('*', 'album', None)
         query_string += f' WHERE bandid = {band_id}'
@@ -124,3 +127,5 @@ class Resources:
         """
         query += f'WHERE s.id = {sale_id}'
         return query
+
+

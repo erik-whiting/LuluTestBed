@@ -131,6 +131,15 @@ def api_albums_create():
     return jsonify({'result': 'ok'}), 201
 
 
+@app.route('/api/v1/resources/albums/<album_id>', methods=['DELETE'])
+def api_albums_delete(album_id):
+    if not album_id:
+        return jsonify({'error': "Missing album id in request"})
+
+    r.album_delete(album_id)
+
+    return jsonify({'result': 'ok'})
+
 @app.route('/api/v1/resources/songs', methods=['GET'])
 def api_songs():
     song_id = request.args.get('id')
