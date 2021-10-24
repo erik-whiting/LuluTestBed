@@ -90,7 +90,7 @@ def api_bands_create():
 
     r.band_create(band_name)
 
-    return jsonify(r.band_by_name(band_name))
+    return jsonify(r.band_by_name(band_name)), 201
 
 
 @app.route('/api/v1/resources/songs', methods=['GET'])
