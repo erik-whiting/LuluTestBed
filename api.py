@@ -84,13 +84,23 @@ def api_bands():
 @app.route('/api/v1/resources/bands', methods=['POST'])
 def api_bands_create():
     if not request.json and 'band_name' not in request.json:
-        return jsonify({"error": "Missing 'brand_name value in request'"})
+        return jsonify({"error": "Missing brand_name value in request'"})
 
     band_name = request.json['band_name']
 
     r.band_create(band_name)
 
     return jsonify(r.band_by_name(band_name)), 201
+
+
+@app.route('/api/v1/resources/bands/<band_id>', methods=['DELETE'])
+def api_bands_delete(band_id):
+    if not band_id:
+        return jsonify({"error": "Missing band_id in request'"})
+
+    r.brand_delete(band_id)
+
+    return jsonify({'result': 'ok'})
 
 
 @app.route('/api/v1/resources/songs', methods=['GET'])
