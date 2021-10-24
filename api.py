@@ -1,5 +1,7 @@
 import json
 import os
+from datetime import datetime
+
 import flask
 from flask import request, jsonify, abort
 from flask import make_response, render_template
@@ -114,6 +116,19 @@ def api_bands_update(band_id):
     r.band_update(band_id, request.json['band_name'])
 
     return jsonify({'result': 'ok'})
+
+
+@app.route('/api/v1/resources/albums', methods=['POST'])
+def api_albums_create():
+    if not request.json and 'album_name' not in request.json:
+        return jsonify({"error": "Missing values in request'"})
+
+    release_datetime = datetime.strptime(request.json['release_date'], '%Y-%m-%d')
+
+    # add option to send also songs
+    r.album_create(request.json['album_name'], release_datetime, request.json['band_id'])
+
+    return jsonify({'result': 'ok'}), 201
 
 
 @app.route('/api/v1/resources/songs', methods=['GET'])

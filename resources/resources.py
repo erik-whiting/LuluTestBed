@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from orm.query import Connection, Query
 
 
@@ -29,6 +31,9 @@ class Resources:
     def albums(self):
         query_string = self.__query_string('*', 'album', None)
         return self.__query(query_string)
+
+    def album_create(self, album_name: str, release_date: datetime, band_id: int):
+        return self.__execute(f"INSERT INTO Album (AlbumName, ReleaseDate, BandId) VALUES ('{album_name}', '{release_date}', '{band_id}');")
 
     def album_view(self):
         q_albums = self.__query_string('*', 'album', None)
