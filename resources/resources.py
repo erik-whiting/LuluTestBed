@@ -14,6 +14,12 @@ class Resources:
         query_string = self.__query_string('*', 'band', band_id)
         return self.__query(query_string)
 
+    def band_create(self, band_name: str):
+        return self.__execute(f"INSERT INTO Band (BandName) VALUES ('{band_name}');")
+
+    def band_by_name(self, band_name: str):
+        return self.__query(f"SELECT * FROM Band WHERE bandname = '{band_name}';")
+
     def albums(self):
         query_string = self.__query_string('*', 'album', None)
         return self.__query(query_string)
@@ -80,14 +86,17 @@ class Resources:
         return self.__query(query_string)
 
     @staticmethod
-    def __query_string(params, table, table_id):
+    def __query_string(params, table, table_id, column='id'):
         q_string = f'SELECT {params} FROM {table}'
-        q_string += f' WHERE id = {table_id}' if table_id else ''
+        q_string += f' WHERE {column} = {table_id}' if table_id else ''
         return q_string
 
     def __query(self, query_string):
         q = Query(self.connection, query_string)
         return q.run()
+
+    def __execute(self, query: str):
+        Query(self.connection, query).execute_no_return()
 
     @staticmethod
     def __line_items_query(sale_id):

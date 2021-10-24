@@ -7,7 +7,6 @@ from resources.resources import Resources
 from resources.sale import Sale
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath('test_site/*')))
@@ -80,6 +79,21 @@ def page_not_found(e):
 def api_bands():
     band_id = request.args.get('id')
     return jsonify(r.bands(band_id))
+
+
+@app.route('/api/v1/resources/bands', methods=['POST'])
+def api_bands_create():
+    if not request.json and 'band_name' not in request.json:
+        return jsonify({"error": "Missing 'brand_name value in request'"})
+
+    band_name = request.json['band_name']
+
+    r.band_create(band_name)
+
+    band = r.band_by_name('marcin')
+
+
+    return jsonify({"result": "ok", "id": band})
 
 
 @app.route('/api/v1/resources/songs', methods=['GET'])
