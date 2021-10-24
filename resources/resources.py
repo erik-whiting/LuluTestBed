@@ -23,6 +23,9 @@ class Resources:
     def brand_delete(self, id: int):
         return self.__execute(f"DELETE FROM band WHERE id =  {id}")
 
+    def band_update(self, band_id: int, band_name: str):
+        return self.__execute(f"UPDATE Band SET bandname = '{band_name}' WHERE id = '{band_id}'")
+
     def albums(self):
         query_string = self.__query_string('*', 'album', None)
         return self.__query(query_string)
