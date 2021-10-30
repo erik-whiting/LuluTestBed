@@ -1,12 +1,13 @@
 import json
 import os
+from datetime import datetime
+
 import flask
 from flask import request, jsonify, abort
 from flask import make_response, render_template
 from resources.resources import Resources
 from resources.sale import Sale
 from dotenv import load_dotenv
-
 
 load_dotenv()
 
@@ -81,6 +82,63 @@ def api_bands():
     band_id = request.args.get('id')
     return jsonify(r.bands(band_id))
 
+
+@app.route('/api/v1/resources/bands', methods=['POST'])
+def api_bands_create():
+    if not request.json and 'band_name' not in request.json:
+        return jsonify({"error": "Missing brand_name value in request'"})
+
+    band_name = request.json['band_name']
+
+    r.band_create(band_name)
+
+    return jsonify(r.band_by_name(band_name)), 201
+
+
+@app.route('/api/v1/resources/bands/<band_id>', methods=['DELETE'])
+def api_bands_delete(band_id):
+    if not band_id:
+        return jsonify({"error": "Missing band_id in request'"})
+
+    r.brand_delete(band_id)
+
+    return jsonify({'result': 'ok'})
+
+
+@app.route('/api/v1/resources/bands/<band_id>', methods=['PUT'])
+def api_bands_update(band_id):
+    if not band_id:
+        return jsonify({"error": "Missing band_id in request'"})
+
+    if not request.json and 'band_name' not in request.json:
+        return jsonify({"error": "Missing brand_name value in request'"})
+
+    r.band_update(band_id, request.json['band_name'])
+
+    return jsonify({'result': 'ok'})
+
+
+@app.route('/api/v1/resources/albums', methods=['POST'])
+def api_albums_create():
+    if not request.json and 'album_name' not in request.json:
+        return jsonify({"error": "Missing values in request'"})
+
+    release_datetime = datetime.strptime(request.json['release_date'], '%Y-%m-%d')
+
+    # add option to send also songs
+    r.album_create(request.json['album_name'], release_datetime, request.json['band_id'])
+
+    return jsonify({'result': 'ok'}), 201
+
+
+@app.route('/api/v1/resources/albums/<album_id>', methods=['DELETE'])
+def api_albums_delete(album_id):
+    if not album_id:
+        return jsonify({'error': "Missing album id in request"})
+
+    r.album_delete(album_id)
+
+    return jsonify({'result': 'ok'})
 
 @app.route('/api/v1/resources/songs', methods=['GET'])
 def api_songs():

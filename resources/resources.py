@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from orm.query import Connection, Query
 
 
@@ -14,9 +16,24 @@ class Resources:
         query_string = self.__query_string('*', 'band', band_id)
         return self.__query(query_string)
 
+    def band_create(self, band_name: str):
+        return self.__execute(f"INSERT INTO Band (BandName) VALUES ('{band_name}');")
+
+    def band_by_name(self, band_name: str):
+        return self.__query(f"SELECT * FROM Band WHERE bandname = '{band_name}';")
+
+    def brand_delete(self, id: int):
+        return self.__execute(f"DELETE FROM band WHERE id =  {id}")
+
+    def band_update(self, band_id: int, band_name: str):
+        return self.__execute(f"UPDATE Band SET bandname = '{band_name}' WHERE id = '{band_id}'")
+
     def albums(self):
         query_string = self.__query_string('*', 'album', None)
         return self.__query(query_string)
+
+    def album_create(self, album_name: str, release_date: datetime, band_id: int):
+        return self.__execute(f"INSERT INTO Album (AlbumName, ReleaseDate, BandId) VALUES ('{album_name}', '{release_date}', '{band_id}');")
 
     def album_view(self):
         q_albums = self.__query_string('*', 'album', None)
@@ -36,6 +53,9 @@ class Resources:
     def album(self, album_id):
         query_string = self.__query_string('*', 'album', album_id)
         return self.__query(query_string)
+
+    def album_delete(self, id):
+        return self.__execute(f"DELETE FROM album WHERE id = {id}")
 
     def album_by_band(self, band_id):
         query_string = self.__query_string('*', 'album', None)
@@ -80,14 +100,17 @@ class Resources:
         return self.__query(query_string)
 
     @staticmethod
-    def __query_string(params, table, table_id):
+    def __query_string(params, table, table_id, column='id'):
         q_string = f'SELECT {params} FROM {table}'
-        q_string += f' WHERE id = {table_id}' if table_id else ''
+        q_string += f' WHERE {column} = {table_id}' if table_id else ''
         return q_string
 
     def __query(self, query_string):
         q = Query(self.connection, query_string)
         return q.run()
+
+    def __execute(self, query: str):
+        Query(self.connection, query).execute_no_return()
 
     @staticmethod
     def __line_items_query(sale_id):
@@ -104,3 +127,5 @@ class Resources:
         """
         query += f'WHERE s.id = {sale_id}'
         return query
+
+

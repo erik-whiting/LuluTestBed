@@ -107,3 +107,46 @@ And that's it! Your application will most likely be running on
 port 5000, [click here](localhost:5000) to see it locally. Let us
 know if we missed any steps or if you've run into any problems by
 raising an issue [here](https://github.com/erik-whiting/LuluTestBed/issues/new/choose). Thanks!
+
+
+## API
+
+### Endpoints
+Descriptions about working with api below  
+
+---
+#### Add band  
+* Http method: POST
+```
+/api/v1/resources/bands
+```
+* Example body
+```json
+{
+  "band_name": "Test name"
+}
+```
+---
+#### Edit band
+* Http method: PUT
+```
+/api/v1/resources/bands/<band_id>
+```
+* Example body
+```json
+{
+  "band_name": "new test name"
+}
+```
+---
+#### Get band
+* Http method: GET
+```
+/api/v1/resources/bands/<band_id>
+```
+---
+#### Delete band
+* Http method: DELETE
+```
+/api/v1/resources/bands/<band_id>
+```
