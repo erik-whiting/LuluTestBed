@@ -120,7 +120,7 @@ Descriptions about working with api below
 ```
 /api/v1/resources/bands
 ```
-* Example request
+* Example body
 ```json
 {
   "band_name": "Test name"
@@ -132,11 +132,17 @@ Descriptions about working with api below
 ```
 /api/v1/resources/bands/<band_id>
 ```
-* Example request
+* Example body
 ```json
 {
   "band_name": "new test name"
 }
+```
+---
+#### Get band
+* Http method: GET
+```
+/api/v1/resources/bands/<band_id>
 ```
 ---
 #### Delete band
