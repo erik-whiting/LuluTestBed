@@ -10,4 +10,4 @@ python-dotenv==0.19.0
 PyYAML==5.4.1
 selenium==3.141.0
 urllib3==1.26.18
-Werkzeug==2.2.3
+Werkzeug==3.0.1
